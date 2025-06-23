@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pwapractica2DaniloMuenala.Carrusel de Imágenes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .carrusel {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .imagenes {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .imagenes img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .boton {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        .boton.izquierda {
+            left: 10px;
+        }
+        .boton.derecha {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="carrusel">
+    <div class="imagenes">
+        <img src="ima1.jpg" alt="Imagen 1">
+        <img src="image3.jpg" alt="Imagen 2">
+        <img src="image4.jpg" alt="Imagen 3">
+    </div>
+    <button class="boton izquierda" onclick="cambiarImagen(-1)">&#10094;</button>
+    <button class="boton derecha" onclick="cambiarImagen(1)">&#10095;</button>
+</div>
+
+<script>
+    let indice = 0;
+
+    function cambiarImagen(direccion) {
+        const imagenes = document.querySelector('.imagenes');
+        const totalImagenes = document.querySelectorAll('.imagenes img').length;
+        indice += direccion;
+
+        if (indice < 0) {
+            indice = totalImagenes - 1;
+        } else if (indice >= totalImagenes) {
+            indice = 0;
+        }
+
+        const desplazamiento = -indice * 100;
+        imagenes.style.transform = `translateX(${desplazamiento}%)`;
+    }
+</script>
+
+</body>
+</html>
